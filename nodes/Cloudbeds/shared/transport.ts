@@ -8,6 +8,9 @@ export async function cloudbedsApiRequest(
 	qs: IDataObject = {},
 	option: IDataObject = {},
 ): Promise<IDataObject> {
+	const authentication = this.getNodeParameter('authentication', 0) as string;
+	const credentialType = authentication === 'oAuth2' ? 'cloudbedsOAuth2Api' : 'cloudbedsApi';
+
 	const options: IHttpRequestOptions = {
 		method,
 		body,
@@ -29,7 +32,7 @@ export async function cloudbedsApiRequest(
 
 	Object.assign(options, option);
 
-	return await this.helpers.httpRequestWithAuthentication.call(this, 'cloudbedsApi', options);
+	return await this.helpers.httpRequestWithAuthentication.call(this, credentialType, options);
 }
 
 export async function cloudbedsApiRequestAllItems(
