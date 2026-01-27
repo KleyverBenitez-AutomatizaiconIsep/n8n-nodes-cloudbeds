@@ -1,19 +1,24 @@
 {
-	"name": "n8n-nodes-<...>",
+	"name": "n8n-nodes-cloudbeds",
 	"version": "0.1.0",
-	"description": "",
+	"description": "Nodo de n8n para integrar con Cloudbeds PMS - Sistema de gestión hotelera",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"cloudbeds",
+		"pms",
+		"hotel",
+		"reservation",
+		"hospitality"
 	],
 	"author": {
-		"name": "",
-		"email": ""
+		"name": "Kleyver Benitez",
+		"email": "kaleb9821@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "https://github.com/<...>/n8n-nodes-cloudbeds.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
@@ -31,12 +36,11 @@
 		"n8nNodesApiVersion": 1,
 		"strict": true,
 		"credentials": [
-			"dist/credentials/GithubIssuesApi.credentials.js",
-			"dist/credentials/GithubIssuesOAuth2Api.credentials.js"
+			"dist/credentials/CloudbedsApi.credentials.js",
+			"dist/credentials/CloudbedsOAuth2Api.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/GithubIssues/GithubIssues.node.js",
-			"dist/nodes/Example/Example.node.js"
+			"dist/nodes/Cloudbeds/Cloudbeds.node.js"
 		]
 	},
 	"devDependencies": {

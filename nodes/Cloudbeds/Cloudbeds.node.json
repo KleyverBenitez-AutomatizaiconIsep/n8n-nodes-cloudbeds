@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.cloudbeds",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://integrations.cloudbeds.com/hc/en-us"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://integrations.cloudbeds.com/hc/en-us/articles/14104678058267-API-Documentation"
+			}
+		]
+	}
+}
