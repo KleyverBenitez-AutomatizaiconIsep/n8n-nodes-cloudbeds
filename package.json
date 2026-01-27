@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-cloudbeds",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "Nodo de n8n para integrar con Cloudbeds PMS - Sistema de gestión hotelera",
 	"license": "MIT",
 	"homepage": "",
