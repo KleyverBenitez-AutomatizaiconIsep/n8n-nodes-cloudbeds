@@ -1,6 +1,9 @@
 # n8n-nodes-cloudbeds
 
-![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png" alt="n8n" height="80">
+  <img src="https://raw.githubusercontent.com/KleyverBenitez-AutomatizaiconIsep/n8n-nodes-cloudbeds/main/assets/cloudbeds-logo.svg" alt="Cloudbeds" height="80">
+</p>
 
 Este paquete contiene un nodo de n8n para integrarse con la **API de Cloudbeds** - el sistema de gestión hotelera (PMS) líder en la industria.
 
@@ -146,9 +149,13 @@ Webhook → Cloudbeds (Get Reservation) → Cloudbeds (Assign Room) → Email
 
 ## Autor
 
-**Kleyver Benitez**
-- Email: kaleb9821@gmail.com
-- GitHub: [@KleyverBenitez-AutomatizaiconIsep](https://github.com/KleyverBenitez-AutomatizaiconIsep)
+**Kleyver Benitez - Calma Celesti**
+
+🌙 **Calma Celesti** - Automatización Hotelera Inteligente
+
+- 🌐 Web: [calmacelesti.mx](https://calmacelesti.mx)
+- 📧 Email: direccion@calmacelesti.mx
+- 💻 GitHub: [@KleyverBenitez-AutomatizaiconIsep](https://github.com/KleyverBenitez-AutomatizaiconIsep)
 
 ## Licencia
 

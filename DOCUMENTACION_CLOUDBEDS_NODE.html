@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Completa - n8n-nodes-cloudbeds</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        h1 {
+            color: #1a1a2e;
+            border-bottom: 3px solid #FBF475;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #16213e;
+            border-left: 5px solid #FBF475;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        h3 {
+            color: #0f3460;
+            margin-top: 30px;
+            font-size: 1.3em;
+        }
+        h4 {
+            color: #e94560;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .operation {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .operation-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .operation-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+        .operation-badge {
+            background: #FBF475;
+            color: #1a1a2e;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .description {
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        th {
+            background: #1a1a2e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .required {
+            color: #e94560;
+            font-weight: bold;
+        }
+        .optional {
+            color: #28a745;
+        }
+        .type {
+            font-family: 'Courier New', monospace;
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .endpoint {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #FBF475;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .intro-box {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .intro-box h2 {
+            color: #FBF475;
+            border: none;
+            margin: 0 0 15px 0;
+            padding: 0;
+            background: none;
+        }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+        }
+        .toc ul {
+            columns: 2;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: #0f3460;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            color: #e94560;
+        }
+        .example {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        @media print {
+            body {
+                padding: 20px;
+            }
+            .operation {
+                page-break-inside: avoid;
+            }
+            h2 {
+                page-break-before: always;
+            }
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="intro-box">
+    <h2>🏨 n8n-nodes-cloudbeds</h2>
+    <p><strong>Versión:</strong> 0.1.8 | <strong>Autor:</strong> Kleyver Benitez - Calma Celesti</p>
+    <p style="background: rgba(251, 244, 117, 0.2); padding: 10px; border-radius: 5px; margin: 10px 0;">
+        🌙 <strong>Calma Celesti</strong> | Automatización Hotelera con n8n<br>
+        <span style="font-size: 0.9em;">calmacelesti.mx</span>
+    </p>
+    <p>Nodo personalizado para integrar n8n con la API de Cloudbeds PMS (Property Management System). Este documento describe todas las funciones disponibles con explicaciones detalladas de cada parámetro.</p>
+</div>
+
+<h1>📚 Documentación Completa del Nodo Cloudbeds</h1>
+
+<div class="toc">
+    <h3>📑 Tabla de Contenidos</h3>
+    <ul>
+        <li><a href="#reservation">1. Reservation (Reservas)</a></li>
+        <li><a href="#guest">2. Guest (Huéspedes)</a></li>
+        <li><a href="#room">3. Room (Habitaciones)</a></li>
+        <li><a href="#property">4. Property (Propiedad)</a></li>
+        <li><a href="#housekeeping">5. Housekeeping (Limpieza)</a></li>
+        <li><a href="#addon">6. Addon (Extras)</a></li>
+        <li><a href="#item">7. Item (Artículos)</a></li>
+        <li><a href="#event">8. Event (Eventos)</a></li>
+        <li><a href="#doorlock">9. Door Lock (Cerraduras)</a></li>
+        <li><a href="#marketsegmentation">10. Market Segmentation</a></li>
+        <li><a href="#integrationevent">11. Integration Event</a></li>
+    </ul>
+</div>
+
+<!-- ============================== -->
+<!-- RESERVATION -->
+<!-- ============================== -->
+<h2 id="reservation">📅 1. RESERVATION (Reservas)</h2>
+<p>Gestiona todas las reservas del hotel. Permite consultar, listar y actualizar asignaciones de habitaciones.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene los detalles completos de una reserva específica por su ID.</p>
+    <div class="endpoint">/api/v1.3/getReservation?reservationID={id}</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Reservation ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>El ID único de la reserva en Cloudbeds. Se puede obtener del listado de reservas o de un webhook.</td>
+        </tr>
+    </table>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Esta operación devuelve información completa incluyendo: datos del huésped, fechas de check-in/out, habitación asignada, balance, estado de pago y notas.
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene múltiples reservas con opciones de filtrado por fechas y estado.</p>
+    <div class="endpoint">/api/v1.3/getReservations</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Return All</td>
+            <td><span class="type">boolean</span></td>
+            <td class="optional">No</td>
+            <td>Si es <code>true</code>, devuelve todas las reservas. Si es <code>false</code>, usa el límite especificado.</td>
+        </tr>
+        <tr>
+            <td>Limit</td>
+            <td><span class="type">number</span></td>
+            <td class="optional">No</td>
+            <td>Número máximo de resultados a devolver (1-100). Por defecto: 50.</td>
+        </tr>
+    </table>
+    
+    <h4>Campos Adicionales (Filtros)</h4>
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Check-in Date From</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Filtra reservas con check-in desde esta fecha.</td>
+        </tr>
+        <tr>
+            <td>Check-in Date To</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Filtra reservas con check-in hasta esta fecha.</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td><span class="type">options</span></td>
+            <td>Filtra por estado: <code>confirmed</code>, <code>checked_in</code>, <code>checked_out</code>, <code>canceled</code>, <code>no_show</code></td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update Room</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza la asignación de habitación para una reserva existente.</p>
+    <div class="endpoint">/api/v1.3/putReservationRoom</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Reservation ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>El ID de la reserva a modificar.</td>
+        </tr>
+        <tr>
+            <td>Reservation Room ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>El ID de la habitación dentro de la reserva (una reserva puede tener múltiples habitaciones).</td>
+        </tr>
+        <tr>
+            <td>Room ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>El nuevo ID de habitación física a asignar.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================== -->
+<!-- GUEST -->
+<!-- ============================== -->
+<h2 id="guest">👤 2. GUEST (Huéspedes)</h2>
+<p>Administra la información de los huéspedes del hotel. Incluye crear, buscar, actualizar y listar huéspedes.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Create</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Crea un nuevo huésped en el sistema.</p>
+    <div class="endpoint">/api/v1.3/postGuest</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Nombre del huésped.</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Apellido del huésped.</td>
+        </tr>
+    </table>
+    
+    <h4>Campos Adicionales</h4>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><span class="type">string</span></td>
+            <td>Correo electrónico del huésped.</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td><span class="type">string</span></td>
+            <td>Número de teléfono.</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><span class="type">string</span></td>
+            <td>Dirección postal.</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><span class="type">string</span></td>
+            <td>Ciudad.</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td><span class="type">string</span></td>
+            <td>Estado/Provincia.</td>
+        </tr>
+        <tr>
+            <td>Postal Code</td>
+            <td><span class="type">string</span></td>
+            <td>Código postal.</td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td><span class="type">string</span></td>
+            <td>Código de país ISO 3166-1 alpha-2 (ej: US, ES, MX).</td>
+        </tr>
+        <tr>
+            <td>Nationality</td>
+            <td><span class="type">string</span></td>
+            <td>Nacionalidad (código ISO).</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Fecha de nacimiento.</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td><span class="type">options</span></td>
+            <td>Género: <code>male</code>, <code>female</code>, <code>other</code></td>
+        </tr>
+        <tr>
+            <td>ID Type</td>
+            <td><span class="type">options</span></td>
+            <td>Tipo de documento: <code>passport</code>, <code>nationalId</code>, <code>driverLicense</code>, <code>other</code></td>
+        </tr>
+        <tr>
+            <td>ID Number</td>
+            <td><span class="type">string</span></td>
+            <td>Número de documento/pasaporte.</td>
+        </tr>
+        <tr>
+            <td>Notes</td>
+            <td><span class="type">string</span></td>
+            <td>Notas internas sobre el huésped.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene la información de un huésped específico.</p>
+    <div class="endpoint">/api/v1.3/getGuest?guestID={id}</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Guest ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>El ID único del huésped.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista todos los huéspedes del hotel.</p>
+    <div class="endpoint">/api/v1.3/getGuests</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Return All</td>
+            <td><span class="type">boolean</span></td>
+            <td class="optional">No</td>
+            <td>Devolver todos los resultados.</td>
+        </tr>
+        <tr>
+            <td>Limit</td>
+            <td><span class="type">number</span></td>
+            <td class="optional">No</td>
+            <td>Máximo de resultados (1-100).</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Search</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Busca huéspedes por nombre, email u otros criterios.</p>
+    <div class="endpoint">/api/v1.3/getGuests?name={query}</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Search Query</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Término de búsqueda (nombre, email, teléfono).</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza la información de un huésped existente.</p>
+    <div class="endpoint">/api/v1.3/putGuest</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Guest ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>El ID del huésped a actualizar.</td>
+        </tr>
+    </table>
+    <p>Los campos actualizables son los mismos que en la operación Create.</p>
+</div>
+
+<!-- ============================== -->
+<!-- ROOM -->
+<!-- ============================== -->
+<h2 id="room">🛏️ 3. ROOM (Habitaciones)</h2>
+<p>Gestiona las habitaciones del hotel, disponibilidad, bloqueos y tipos de habitación.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista todas las habitaciones de la propiedad.</p>
+    <div class="endpoint">/api/v1.3/getRooms</div>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Devuelve todas las habitaciones con su estado actual (disponible, ocupada, bloqueada, etc.)
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Room Types</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene todos los tipos de habitación configurados.</p>
+    <div class="endpoint">/api/v1.3/getRoomTypes</div>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Útil para conocer las categorías de habitaciones (Estándar, Suite, Deluxe, etc.) con sus características y precios base.
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Available</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Consulta disponibilidad de habitaciones para un rango de fechas.</p>
+    <div class="endpoint">/api/v1.3/getAvailableRoomTypes</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fecha de inicio (check-in).</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fecha de fin (check-out).</td>
+        </tr>
+        <tr>
+            <td>Number of Rooms</td>
+            <td><span class="type">number</span></td>
+            <td class="required">Sí</td>
+            <td>Cantidad de habitaciones necesarias.</td>
+        </tr>
+        <tr>
+            <td>Number of Adults</td>
+            <td><span class="type">number</span></td>
+            <td class="required">Sí</td>
+            <td>Número de adultos.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Unassigned</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene habitaciones sin asignación para un período.</p>
+    <div class="endpoint">/api/v1.3/getUnassignedRooms</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fecha de inicio.</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fecha de fin.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Block Room</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Bloquea una habitación para un rango de fechas (mantenimiento, fuera de servicio, etc.).</p>
+    <div class="endpoint">/api/v1.3/postRoomBlock</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Room ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la habitación a bloquear.</td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Inicio del bloqueo.</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fin del bloqueo.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Unblock Room</span>
+        <span class="operation-badge">DELETE</span>
+    </div>
+    <p class="description">Desbloquea una habitación previamente bloqueada.</p>
+    <div class="endpoint">/api/v1.3/deleteRoomBlock</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Room ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la habitación.</td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Inicio del período a desbloquear.</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fin del período a desbloquear.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================== -->
+<!-- PROPERTY -->
+<!-- ============================== -->
+<h2 id="property">🏨 4. PROPERTY (Propiedad)</h2>
+<p>Información de la propiedad/hotel.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get System Info</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene información del sistema y versiones de componentes de la propiedad.</p>
+    <div class="endpoint">/api/v1.3/getHotels</div>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Útil para verificar la conexión y obtener el Property ID que se necesita en otras operaciones.
+    </div>
+</div>
+
+<!-- ============================== -->
+<!-- HOUSEKEEPING -->
+<!-- ============================== -->
+<h2 id="housekeeping">🧹 5. HOUSEKEEPING (Limpieza)</h2>
+<p>Gestión del estado de limpieza de habitaciones y asignaciones del personal.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Status</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene el estado de limpieza actual de todas las habitaciones.</p>
+    <div class="endpoint">/api/v1.3/getHousekeepingStatus</div>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Devuelve una lista de habitaciones con su estado: <code>clean</code>, <code>dirty</code>, <code>inspected</code>.
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Assignments</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene las asignaciones de limpieza del personal.</p>
+    <div class="endpoint">/api/v1.3/getHousekeepingAssignments</div>
+    
+    <h4>Filtros Opcionales</h4>
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Filtrar asignaciones por fecha específica.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update Room Condition</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza el estado de limpieza de una habitación.</p>
+    <div class="endpoint">/api/v1.3/putRoomCondition</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Room ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la habitación.</td>
+        </tr>
+        <tr>
+            <td>Room Condition</td>
+            <td><span class="type">options</span></td>
+            <td class="required">Sí</td>
+            <td>Nuevo estado: <code>clean</code>, <code>dirty</code>, <code>inspected</code></td>
+        </tr>
+    </table>
+    
+    <div class="note">
+        <strong>⚠️ Nota:</strong> Cambiar a <code>inspected</code> indica que la habitación fue verificada por un supervisor y está lista para el check-in.
+    </div>
+</div>
+
+<!-- ============================== -->
+<!-- ADDON -->
+<!-- ============================== -->
+<h2 id="addon">➕ 6. ADDON (Extras/Servicios Adicionales)</h2>
+<p>Gestiona los servicios adicionales que se pueden agregar a las reservas (desayuno, spa, parking, etc.).</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista todos los addons disponibles en la propiedad.</p>
+    <div class="endpoint">/api/v1.3/getAddons</div>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Devuelve la lista de extras configurados con sus precios y descripciones.
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Add to Reservation</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Agrega un servicio adicional a una reserva existente.</p>
+    <div class="endpoint">/api/v1.3/postReservationAddon</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Reservation ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la reserva.</td>
+        </tr>
+        <tr>
+            <td>Addon ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del addon a agregar.</td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td><span class="type">number</span></td>
+            <td class="required">Sí</td>
+            <td>Cantidad de addons.</td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td><span class="type">number</span></td>
+            <td class="required">Sí</td>
+            <td>Precio por unidad.</td>
+        </tr>
+    </table>
+    
+    <div class="example">
+Ejemplo de uso:
+- Addon: "Desayuno Buffet"
+- Quantity: 2 (dos huéspedes)
+- Amount: 15.00 (por persona)
+- Total cobrado: $30.00
+    </div>
+</div>
+
+<!-- ============================== -->
+<!-- ITEM -->
+<!-- ============================== -->
+<h2 id="item">📦 7. ITEM (Artículos de Inventario)</h2>
+<p>Gestiona artículos del inventario que se pueden vender o agregar a reservas (minibar, productos de tienda, etc.).</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista todos los artículos del inventario.</p>
+    <div class="endpoint">/api/v1.3/getItems</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene un artículo específico por ID.</p>
+    <div class="endpoint">/api/v1.3/getItem?itemID={id}</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Item ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del artículo.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Categories</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene las categorías de artículos.</p>
+    <div class="endpoint">/api/v1.3/getItemCategories</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Add to Reservation</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Agrega un artículo a una reserva (cargo a la habitación).</p>
+    <div class="endpoint">/api/v1.3/postReservationItem</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Reservation ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la reserva.</td>
+        </tr>
+        <tr>
+            <td>Item ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del artículo.</td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td><span class="type">number</span></td>
+            <td class="required">Sí</td>
+            <td>Cantidad.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================== -->
+<!-- EVENT -->
+<!-- ============================== -->
+<h2 id="event">📅 8. EVENT (Eventos)</h2>
+<p>Gestiona eventos del hotel (conferencias, bodas, reuniones, etc.).</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Create</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Crea un nuevo evento.</p>
+    <div class="endpoint">/api/v1.3/postEvent</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Título del evento.</td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fecha y hora de inicio.</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fecha y hora de fin.</td>
+        </tr>
+    </table>
+    
+    <h4>Campos Adicionales</h4>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><span class="type">string</span></td>
+            <td>Descripción detallada del evento.</td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td><span class="type">string</span></td>
+            <td>Ubicación dentro del hotel.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene un evento por ID.</p>
+    <div class="endpoint">/api/v1.3/getEvent?eventID={id}</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Event ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del evento.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista eventos con filtros opcionales.</p>
+    <div class="endpoint">/api/v1.3/getEvents</div>
+    
+    <h4>Filtros Opcionales</h4>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Start Date From</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Eventos que inician desde esta fecha.</td>
+        </tr>
+        <tr>
+            <td>Start Date To</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Eventos que inician hasta esta fecha.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza un evento existente.</p>
+    <div class="endpoint">/api/v1.3/putEvent</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Delete</span>
+        <span class="operation-badge">DELETE</span>
+    </div>
+    <p class="description">Elimina un evento.</p>
+    <div class="endpoint">/api/v1.3/deleteEvent</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Event ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del evento a eliminar.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================== -->
+<!-- DOOR LOCK -->
+<!-- ============================== -->
+<h2 id="doorlock">🔐 9. DOOR LOCK (Cerraduras Inteligentes)</h2>
+<p>Gestiona las cerraduras inteligentes integradas con Cloudbeds. Permite crear, actualizar y eliminar llaves digitales.</p>
+
+<div class="note">
+    <strong>⚠️ Nota:</strong> Esta funcionalidad requiere que el hotel tenga integrado un sistema de cerraduras compatible con Cloudbeds. Si usas un sistema externo como TTLock, puedes usar HTTP Request directamente.
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Keys</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene todas las llaves digitales de la propiedad.</p>
+    <div class="endpoint">/api/v1.3/getDoorLockKeys</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Property ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la propiedad.</td>
+        </tr>
+        <tr>
+            <td>Return All</td>
+            <td><span class="type">boolean</span></td>
+            <td class="optional">No</td>
+            <td>Devolver todas las llaves.</td>
+        </tr>
+        <tr>
+            <td>Limit</td>
+            <td><span class="type">number</span></td>
+            <td class="optional">No</td>
+            <td>Máximo de resultados.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Create Key</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Crea una nueva llave digital para una habitación.</p>
+    <div class="endpoint">/api/v1.3/postDoorLockKey</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Room ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la habitación para la llave.</td>
+        </tr>
+        <tr>
+            <td>Reservation ID</td>
+            <td><span class="type">string</span></td>
+            <td class="optional">No</td>
+            <td>ID de la reserva asociada.</td>
+        </tr>
+        <tr>
+            <td>Start Time</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Inicio de validez de la llave.</td>
+        </tr>
+        <tr>
+            <td>End Time</td>
+            <td><span class="type">dateTime</span></td>
+            <td class="required">Sí</td>
+            <td>Fin de validez de la llave.</td>
+        </tr>
+    </table>
+    
+    <div class="example">
+Flujo típico:
+1. Huésped hace check-in
+2. Se crea llave con Start = hora check-in, End = hora check-out
+3. Se envía la llave digital al huésped por email/SMS
+4. La llave se desactiva automáticamente al check-out
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update Key</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza una llave existente (por ejemplo, extender validez).</p>
+    <div class="endpoint">/api/v1.3/putDoorLockKey</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Key ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la llave a actualizar.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Delete Key</span>
+        <span class="operation-badge">DELETE</span>
+    </div>
+    <p class="description">Elimina/revoca una llave digital.</p>
+    <div class="endpoint">/api/v1.3/deleteDoorLockKey</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Key ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID de la llave a eliminar.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Delete Keys (Batch)</span>
+        <span class="operation-badge">DELETE</span>
+    </div>
+    <p class="description">Elimina múltiples llaves de una vez.</p>
+    <div class="endpoint">/api/v1.3/deleteDoorLockKeys</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Key IDs</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Lista de IDs separados por coma.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Settings</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene la configuración de cerraduras de la propiedad.</p>
+    <div class="endpoint">/api/v1.3/getDoorLockSettings</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Upsert Settings</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Crea o actualiza la configuración de cerraduras.</p>
+    <div class="endpoint">/api/v1.3/putDoorLockSettings</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Delete Settings</span>
+        <span class="operation-badge">DELETE</span>
+    </div>
+    <p class="description">Elimina la configuración de cerraduras.</p>
+    <div class="endpoint">/api/v1.3/deleteDoorLockSettings</div>
+</div>
+
+<!-- ============================== -->
+<!-- MARKET SEGMENTATION -->
+<!-- ============================== -->
+<h2 id="marketsegmentation">📊 10. MARKET SEGMENTATION (Segmentación de Mercado)</h2>
+<p>Gestiona grupos y segmentos de mercado para análisis de ventas y revenue management.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Groups</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista todos los grupos de segmentación de mercado.</p>
+    <div class="endpoint">/api/v1.3/getMarketSegmentationGroups</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Group</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene un grupo específico.</p>
+    <div class="endpoint">/api/v1.3/getMarketSegmentationGroup</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Group ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del grupo.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Create Group</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Crea un nuevo grupo de segmentación.</p>
+    <div class="endpoint">/api/v1.3/postMarketSegmentationGroup</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Nombre del grupo (ej: "Canal de Reserva", "Tipo de Cliente").</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update Group</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza un grupo existente.</p>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Delete Group</span>
+        <span class="operation-badge">DELETE</span>
+    </div>
+    <p class="description">Elimina un grupo de segmentación.</p>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Enable/Disable Group</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Activa o desactiva un grupo sin eliminarlo.</p>
+</div>
+
+<h3>Operaciones de Segmentos</h3>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Segments</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista todos los segmentos de mercado.</p>
+    <div class="endpoint">/api/v1.3/getMarketSegmentationSegments</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Create Segment</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Crea un nuevo segmento dentro de un grupo.</p>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Segment Name</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Nombre del segmento (ej: "Booking.com", "Directo Web").</td>
+        </tr>
+        <tr>
+            <td>Group ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Grupo al que pertenece el segmento.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Segment Reservations</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Obtiene todas las reservas asociadas a un segmento.</p>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Segment ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del segmento.</td>
+        </tr>
+    </table>
+    
+    <div class="tip">
+        <strong>💡 Tip:</strong> Útil para reportes de revenue por canal o tipo de cliente.
+    </div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Set Default Segment</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Establece un segmento como predeterminado para nuevas reservas.</p>
+</div>
+
+<!-- ============================== -->
+<!-- INTEGRATION EVENT -->
+<!-- ============================== -->
+<h2 id="integrationevent">🔗 11. INTEGRATION EVENT (Eventos de Integración)</h2>
+<p>Gestiona eventos para sincronización con sistemas externos y webhooks.</p>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Get Many</span>
+        <span class="operation-badge">GET</span>
+    </div>
+    <p class="description">Lista eventos de integración con filtros.</p>
+    <div class="endpoint">/api/v1.3/getIntegrationEvents</div>
+    
+    <h4>Filtros Disponibles</h4>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Event Type</td>
+            <td><span class="type">string</span></td>
+            <td>Filtrar por tipo de evento.</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td><span class="type">options</span></td>
+            <td><code>pending</code>, <code>processing</code>, <code>completed</code>, <code>failed</code></td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Eventos creados después de esta fecha.</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Eventos creados antes de esta fecha.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Create</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Crea un nuevo evento de integración.</p>
+    <div class="endpoint">/api/v1.3/postIntegrationEvent</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Event Type</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>Tipo de evento (ej: "reservation_sync", "guest_update").</td>
+        </tr>
+        <tr>
+            <td>Payload</td>
+            <td><span class="type">json</span></td>
+            <td class="required">Sí</td>
+            <td>Datos JSON del evento.</td>
+        </tr>
+    </table>
+    
+    <h4>Campos Adicionales</h4>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Reference ID</td>
+            <td><span class="type">string</span></td>
+            <td>ID de referencia externa para tracking.</td>
+        </tr>
+        <tr>
+            <td>Scheduled At</td>
+            <td><span class="type">dateTime</span></td>
+            <td>Programar procesamiento para una fecha/hora específica.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Update</span>
+        <span class="operation-badge">PUT</span>
+    </div>
+    <p class="description">Actualiza un evento de integración.</p>
+    <div class="endpoint">/api/v1.3/putIntegrationEvent</div>
+</div>
+
+<div class="operation">
+    <div class="operation-header">
+        <span class="operation-name">Retry</span>
+        <span class="operation-badge">POST</span>
+    </div>
+    <p class="description">Reintenta un evento fallido.</p>
+    <div class="endpoint">/api/v1.3/postIntegrationEventRetry</div>
+    
+    <table>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Event ID</td>
+            <td><span class="type">string</span></td>
+            <td class="required">Sí</td>
+            <td>ID del evento fallido a reintentar.</td>
+        </tr>
+    </table>
+    
+    <div class="note">
+        <strong>⚠️ Nota:</strong> Solo se pueden reintentar eventos con estado <code>failed</code>.
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><strong>n8n-nodes-cloudbeds v0.1.8</strong></p>
+    <p style="font-size: 1.1em; margin: 15px 0;">
+        🚀 Desarrollado por <strong>Kleyver Benitez</strong><br>
+        <span style="color: #0f3460;">Especialista en Automatización con n8n</span>
+    </p>
+    <p style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 15px 25px; border-radius: 8px; display: inline-block; margin: 10px 0;">
+        🌙 <strong style="color: #FBF475;">Calma Celesti</strong> - Automatización Hotelera Inteligente<br>
+        <a href="https://calmacelesti.mx" style="color: #FBF475; text-decoration: none;">🌐 calmacelesti.mx</a>
+    </p>
+    <p style="margin-top: 15px;">
+        📧 direccion@calmacelesti.mx<br>
+        🔗 <a href="https://github.com/KleyverBenitez-AutomatizaiconIsep/n8n-nodes-cloudbeds" style="color: #0f3460;">GitHub Repository</a>
+    </p>
+    <p style="font-size: 0.9em; color: #999; margin-top: 20px;">© 2026 Calma Celesti - Todos los derechos reservados</p>
+</div>
+
+</body>
+</html>
