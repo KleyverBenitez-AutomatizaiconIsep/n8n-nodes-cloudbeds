@@ -1,8 +1,9 @@
 # n8n-nodes-cloudbeds
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/KleyverBenitez-AutomatizaiconIsep/n8n-nodes-cloudbeds/main/nodes/Cloudbeds/cloudbeds_logo_stacked.svg" alt="Cloudbeds" height="80">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png" alt="n8n" height="80">
-  <img src="https://raw.githubusercontent.com/KleyverBenitez-AutomatizaiconIsep/n8n-nodes-cloudbeds/main/nodes/Cloudbeds/cloudbeds.svg" alt="Cloudbeds" height="80">
 </p>
 
 Este paquete contiene un nodo de n8n para integrarse con la **API de Cloudbeds** - el sistema de gestión hotelera (PMS) líder en la industria.
