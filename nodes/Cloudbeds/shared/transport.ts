@@ -11,11 +11,17 @@ export async function cloudbedsApiRequest(
 	const authentication = this.getNodeParameter('authentication', 0) as string;
 	const credentialType = authentication === 'oAuth2' ? 'cloudbedsOAuth2Api' : 'cloudbedsApi';
 
+	// Determine base URL based on endpoint
+	let baseUrl = 'https://api.cloudbeds.com/api/v1.3';
+	if (endpoint.startsWith('/addons/') || endpoint.startsWith('/integration/') || endpoint.startsWith('/events/')) {
+		baseUrl = 'https://api.cloudbeds.com';
+	}
+
 	const options: IHttpRequestOptions = {
 		method,
 		body,
 		qs,
-		url: `https://api.cloudbeds.com/api/v1.3${endpoint}`,
+		url: `${baseUrl}${endpoint}`,
 		headers: {
 			'Content-Type': 'application/json',
 		},
