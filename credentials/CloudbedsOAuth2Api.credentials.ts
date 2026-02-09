@@ -48,6 +48,14 @@ export class CloudbedsOAuth2Api implements ICredentialType {
 			type: 'hidden',
 			default: 'body',
 		},
+		{
+			displayName: 'Property ID',
+			name: 'propertyId',
+			type: 'string',
+			default: '',
+			required: true,
+			description: 'Your Cloudbeds Property ID. Required for some API endpoints like addons and events.',
+		},
 	];
 
 	authenticate: IAuthenticateGeneric = {

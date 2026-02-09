@@ -18,9 +18,12 @@ export async function cloudbedsApiRequest(
 		baseUrl = 'https://api.cloudbeds.com';
 	}
 
-	const headers: IDataObject = {
-		'Content-Type': 'application/json',
-	};
+	const headers: IDataObject = {};
+
+	// Only set Content-Type for non-GET methods
+	if (method !== 'GET') {
+		headers['Content-Type'] = 'application/json';
+	}
 
 	// Add X-Property-ID header for endpoints that require it
 	if (needsPropertyHeader) {
