@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Nodos Cloudbeds para n8n</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px 20px;
+            background: #f8f9fa;
+            border: 2px solid #1a5f7a;
+            border-radius: 8px;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .plus-sign {
+            font-size: 28px;
+            color: #1a5f7a;
+            font-weight: 300;
+        }
+        
+        h1 {
+            color: #1a5f7a;
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666666;
+            font-size: 14px;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h2 {
+            color: #1a5f7a;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 8px;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 20px;
+        }
+        
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+        }
+        
+        .toc-number {
+            background: #1a5f7a;
+            color: #ffffff;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .toc-text {
+            color: #333333;
+            font-size: 13px;
+        }
+        
+        .toc-ops {
+            color: #888888;
+            font-size: 11px;
+            margin-left: auto;
+        }
+        
+        .resource-section {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        
+        .resource-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #1a5f7a;
+        }
+        
+        .resource-number {
+            background: #1a5f7a;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .resource-info {
+            flex: 1;
+        }
+        
+        .resource-title {
+            color: #1a5f7a;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .resource-subtitle {
+            color: #666666;
+            font-size: 12px;
+        }
+        
+        .resource-icon {
+            font-size: 24px;
+        }
+        
+        .operations-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .operation {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            padding: 15px;
+            page-break-inside: avoid;
+        }
+        
+        .operation-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .operation-name {
+            color: #212529;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .operation-badge {
+            background: #28a745;
+            color: #ffffff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .operation-desc {
+            color: #495057;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .params-section {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 12px;
+        }
+        
+        .params-title {
+            color: #1a5f7a;
+            font-size: 12px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .param-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .param-item {
+            background: #f8f9fa;
+            padding: 8px 10px;
+            border: 1px solid #e9ecef;
+            border-radius: 3px;
+            display: grid;
+            grid-template-columns: 120px auto 1fr;
+            gap: 10px;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .param-name {
+            color: #1a5f7a;
+            font-weight: 600;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+        }
+        
+        .param-badges {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .param-type {
+            background: #6c757d;
+            color: #ffffff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .param-required {
+            background: #dc3545;
+            color: #ffffff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .param-optional {
+            background: #28a745;
+            color: #ffffff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .param-desc {
+            color: #495057;
+            font-size: 12px;
+        }
+        
+        .info-box {
+            border-radius: 4px;
+            padding: 10px 12px;
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            font-size: 12px;
+        }
+        
+        .info-box-icon {
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .info-box-content {
+            flex: 1;
+            line-height: 1.4;
+        }
+        
+        .tip-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .tip-box .info-box-content {
+            color: #155724;
+        }
+        
+        .example-box {
+            background: #e2e3f3;
+            border: 1px solid #c5cae9;
+        }
+        
+        .example-box .info-box-content {
+            color: #3f51b5;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+        }
+        
+        footer .brand {
+            color: #1a5f7a;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        footer .company {
+            color: #666666;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+        
+        footer a {
+            color: #1a5f7a;
+            text-decoration: none;
+        }
+        
+        footer .contact {
+            color: #888888;
+            font-size: 11px;
+        }
+        
+        @media print {
+            body {
+                font-size: 12px;
+            }
+            
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+            
+            .resource-section, .operation {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .param-item {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#1a5f7a"/>
+                    <text x="50" y="65" font-size="40" text-anchor="middle" fill="#ffffff">☁</text>
+                </svg>
+                <span class="plus-sign">+</span>
+                <svg class="logo" viewBox="0 0 100 100">
+                    <rect x="10" y="10" width="80" height="80" rx="15" fill="#ff6d5a"/>
+                    <text x="50" y="65" font-size="35" text-anchor="middle" fill="white" font-weight="bold">n8n</text>
+                </svg>
+            </div>
+            <h1>Guía de Nodos Cloudbeds</h1>
+            <p class="subtitle">Referencia de operaciones para automatizaciones hoteleras</p>
+        </header>
+
+        <nav class="toc">
+            <h2>📑 Índice de Recursos</h2>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <span class="toc-number">1</span>
+                    <span class="toc-text">Room (Habitación)</span>
+                    <span class="toc-ops">2 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">2</span>
+                    <span class="toc-text">Reservation (Reservación)</span>
+                    <span class="toc-ops">2 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">3</span>
+                    <span class="toc-text">Guest (Huésped)</span>
+                    <span class="toc-ops">2 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">4</span>
+                    <span class="toc-text">Housekeeping (Limpieza)</span>
+                    <span class="toc-ops">2 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">5</span>
+                    <span class="toc-text">Item (Artículo)</span>
+                    <span class="toc-ops">3 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">6</span>
+                    <span class="toc-text">Addon (Complemento)</span>
+                    <span class="toc-ops">2 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">7</span>
+                    <span class="toc-text">Integration Event</span>
+                    <span class="toc-ops">2 ops</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">8</span>
+                    <span class="toc-text">Event (Evento)</span>
+                    <span class="toc-ops">1 op</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 1. ROOM -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">1</div>
+                <div class="resource-info">
+                    <div class="resource-title">Room</div>
+                    <div class="resource-subtitle">Gestión de habitaciones y disponibilidad</div>
+                </div>
+                <div class="resource-icon">🛏️</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Available Rooms</span>
+                        <span class="operation-badge">getAvailable</span>
+                    </div>
+                    <p class="operation-desc">Consulta las habitaciones disponibles en un rango de fechas. Usa este nodo para verificar disponibilidad antes de crear una reservación.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">startDate</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">Fecha de inicio (YYYY-MM-DD)</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">endDate</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">Fecha de fin (YYYY-MM-DD)</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">roomTypeID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Filtrar por tipo de habitación específico</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Many Rooms</span>
+                        <span class="operation-badge">getAll</span>
+                    </div>
+                    <p class="operation-desc">Obtiene la lista completa de habitaciones de la propiedad con sus detalles y estado actual.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todas las habitaciones sin límite</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">limit</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Número máximo de resultados</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box example-box">
+                        <span class="info-box-icon">📌</span>
+                        <span class="info-box-content">Úsalo para crear un dashboard de estado de habitaciones en tiempo real.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. RESERVATION -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">2</div>
+                <div class="resource-info">
+                    <div class="resource-title">Reservation</div>
+                    <div class="resource-subtitle">Consulta y gestión de reservaciones</div>
+                </div>
+                <div class="resource-icon">📅</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Many Reservations</span>
+                        <span class="operation-badge">getAll</span>
+                    </div>
+                    <p class="operation-desc">Obtiene una lista de reservaciones con todos sus detalles. Es el nodo más usado en automatizaciones hoteleras.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todas las reservaciones</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">limit</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Límite de resultados</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">status</span>
+                                <div class="param-badges">
+                                    <span class="param-type">select</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Estados: confirmed, checked_in, checked_out, canceled</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">checkInFrom</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Fecha mínima de check-in</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">checkInTo</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Fecha máxima de check-in</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Update Reservation Room</span>
+                        <span class="operation-badge">updateRoom</span>
+                    </div>
+                    <p class="operation-desc">Cambia la habitación asignada a una reservación. Ideal para upgrades o cambios de última hora.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">reservationID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID de la reservación a modificar</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">roomID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID de la nueva habitación</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box tip-box">
+                        <span class="info-box-icon">💡</span>
+                        <span class="info-box-content">Combínalo con "Get Available Rooms" para automatizar upgrades cuando hay disponibilidad.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. GUEST -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">3</div>
+                <div class="resource-info">
+                    <div class="resource-title">Guest</div>
+                    <div class="resource-subtitle">Información y datos de huéspedes</div>
+                </div>
+                <div class="resource-icon">👤</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Many Guests</span>
+                        <span class="operation-badge">getAll</span>
+                    </div>
+                    <p class="operation-desc">Obtiene la lista de huéspedes registrados. Permite filtrar por email, nombre o estado de reservación.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todos los huéspedes</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">limit</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Límite de resultados</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">filters</span>
+                                <div class="param-badges">
+                                    <span class="param-type">object</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Filtros: email, nombre, estado</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Update Guest</span>
+                        <span class="operation-badge">update</span>
+                    </div>
+                    <p class="operation-desc">Actualiza los datos de un huésped existente. Solo envía los campos que deseas modificar.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">guestID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID del huésped a actualizar</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">firstName</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Nombre del huésped</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">lastName</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Apellido del huésped</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">email</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Correo electrónico</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">phone</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Número de teléfono</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HOUSEKEEPING -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">4</div>
+                <div class="resource-info">
+                    <div class="resource-title">Housekeeping</div>
+                    <div class="resource-subtitle">Estado de limpieza y asignaciones</div>
+                </div>
+                <div class="resource-icon">🧹</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Housekeeping Status</span>
+                        <span class="operation-badge">getStatus</span>
+                    </div>
+                    <p class="operation-desc">Consulta el estado de limpieza de las habitaciones. Fundamental para coordinar al equipo de housekeeping.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">roomID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Filtrar por habitación específica</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">status</span>
+                                <div class="param-badges">
+                                    <span class="param-type">select</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Estados: clean, dirty, inspected, out_of_service</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box tip-box">
+                        <span class="info-box-icon">💡</span>
+                        <span class="info-box-content">Programa un trigger para enviar reportes diarios del estado de limpieza cada mañana.</span>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Housekeeping Assignments</span>
+                        <span class="operation-badge">getAssignments</span>
+                    </div>
+                    <p class="operation-desc">Obtiene las asignaciones de limpieza por empleado. Ve qué habitaciones tiene asignadas cada camarista.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">date</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Fecha de consulta (default: hoy)</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">employeeID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Filtrar por empleado</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box example-box">
+                        <span class="info-box-icon">📌</span>
+                        <span class="info-box-content">Envía automáticamente a cada camarista su lista de habitaciones por WhatsApp cada mañana.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ITEM -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">5</div>
+                <div class="resource-info">
+                    <div class="resource-title">Item</div>
+                    <div class="resource-subtitle">Productos y cargos de minibar/tienda</div>
+                </div>
+                <div class="resource-icon">📦</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Many Items</span>
+                        <span class="operation-badge">getAll</span>
+                    </div>
+                    <p class="operation-desc">Obtiene el catálogo de productos disponibles para venta: minibar, tienda, room service, etc.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todos los artículos</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">limit</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Límite de resultados</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">categoryID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Filtrar por categoría</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Item Categories</span>
+                        <span class="operation-badge">getCategories</span>
+                    </div>
+                    <p class="operation-desc">Lista las categorías de artículos disponibles: comida, bebidas, servicios, etc.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todas las categorías</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Add Item to Reservation</span>
+                        <span class="operation-badge">addToReservation</span>
+                    </div>
+                    <p class="operation-desc">Agrega un cargo de producto a una reservación. Automatiza cargos de minibar, room service, spa, etc.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">reservationID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID de la reservación</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">itemID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID del artículo a agregar</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">quantity</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Cantidad (default: 1)</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">price</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Precio personalizado</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box tip-box">
+                        <span class="info-box-icon">💡</span>
+                        <span class="info-box-content">Integra con tu sistema POS para cargar automáticamente consumos del restaurante.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ADDON -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">6</div>
+                <div class="resource-info">
+                    <div class="resource-title">Addon</div>
+                    <div class="resource-subtitle">Servicios adicionales y extras</div>
+                </div>
+                <div class="resource-icon">➕</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Many Addons</span>
+                        <span class="operation-badge">getAll</span>
+                    </div>
+                    <p class="operation-desc">Lista los servicios adicionales disponibles: desayuno, late checkout, transporte, tours, etc.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todos los addons</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">limit</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Límite de resultados</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Add Addon to Reservation</span>
+                        <span class="operation-badge">addToReservation</span>
+                    </div>
+                    <p class="operation-desc">Agrega un servicio adicional a una reservación existente.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">reservationID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID de la reservación</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">addonID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID del addon a agregar</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">quantity</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Cantidad (default: 1)</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">date</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Fecha del servicio</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box example-box">
+                        <span class="info-box-icon">📌</span>
+                        <span class="info-box-content">Cuando un huésped pide desayuno por WhatsApp, agrega automáticamente el cargo a su cuenta.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. INTEGRATION EVENT -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">7</div>
+                <div class="resource-info">
+                    <div class="resource-title">Integration Event</div>
+                    <div class="resource-subtitle">Eventos para sincronización externa</div>
+                </div>
+                <div class="resource-icon">🔗</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Get Many Integration Events</span>
+                        <span class="operation-badge">getAll</span>
+                    </div>
+                    <p class="operation-desc">Consulta los eventos de integración registrados. Permiten sincronizar Cloudbeds con otros sistemas.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">returnAll</span>
+                                <div class="param-badges">
+                                    <span class="param-type">boolean</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Retorna todos los eventos</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">limit</span>
+                                <div class="param-badges">
+                                    <span class="param-type">number</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Límite de eventos</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">eventType</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Filtrar por tipo de evento</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Create Integration Event</span>
+                        <span class="operation-badge">create</span>
+                    </div>
+                    <p class="operation-desc">Crea un nuevo evento de integración para registrar acciones de sistemas externos en Cloudbeds.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">eventType</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">Tipo de evento a crear</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">eventData</span>
+                                <div class="param-badges">
+                                    <span class="param-type">object</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">Datos del evento en JSON</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">referenceID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">ID de referencia externa</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. EVENT -->
+        <section class="resource-section">
+            <div class="resource-header">
+                <div class="resource-number">8</div>
+                <div class="resource-info">
+                    <div class="resource-title">Event</div>
+                    <div class="resource-subtitle">Eventos del calendario de la propiedad</div>
+                </div>
+                <div class="resource-icon">📆</div>
+            </div>
+            
+            <div class="operations-container">
+                <div class="operation">
+                    <div class="operation-header">
+                        <span class="operation-name">Update Event</span>
+                        <span class="operation-badge">update</span>
+                    </div>
+                    <p class="operation-desc">Modifica un evento existente en el calendario de la propiedad.</p>
+                    
+                    <div class="params-section">
+                        <p class="params-title">📋 Parámetros</p>
+                        <ul class="param-list">
+                            <li class="param-item">
+                                <span class="param-name">eventID</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-required">Requerido</span>
+                                </div>
+                                <span class="param-desc">ID del evento a actualizar</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">title</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Nuevo título del evento</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">description</span>
+                                <div class="param-badges">
+                                    <span class="param-type">string</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Nueva descripción</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">startDate</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Nueva fecha de inicio</span>
+                            </li>
+                            <li class="param-item">
+                                <span class="param-name">endDate</span>
+                                <div class="param-badges">
+                                    <span class="param-type">date</span>
+                                    <span class="param-optional">Opcional</span>
+                                </div>
+                                <span class="param-desc">Nueva fecha de fin</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="brand">n8n-nodes-cloudbeds v0.1.13</p>
+            <p class="company">Desarrollado por <a href="https://calmacelesti.mx">Calma Celesti</a></p>
+            <p class="company">Automatización Hotelera Inteligente</p>
+            <p class="contact">📧 direccion@calmacelesti.mx</p>
+        </footer>
+    </div>
+</body>
+</html>

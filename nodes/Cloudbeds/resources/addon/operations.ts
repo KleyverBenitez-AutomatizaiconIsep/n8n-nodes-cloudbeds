@@ -3,7 +3,13 @@ import { cloudbedsApiRequest } from '../../shared/transport';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function getAll(this: IExecuteFunctions, _index: number) {
-	return await cloudbedsApiRequest.call(this, 'GET', '/getAddons');
+	// Cloudbeds API uses /getHotelFeesAndAddons to fetch addons
+	const response = await cloudbedsApiRequest.call(this, 'GET', '/getHotelFeesAndAddons');
+	// Filter to return only addons if the response includes both fees and addons
+	if (response.data && Array.isArray(response.data)) {
+		return { ...response, data: response.data.filter((item: IDataObject) => item.type === 'addon') };
+	}
+	return response;
 }
 
 export async function addToReservation(this: IExecuteFunctions, index: number) {
