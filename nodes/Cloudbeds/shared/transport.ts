@@ -13,8 +13,21 @@ export async function cloudbedsApiRequest(
 
 	// Determine base URL based on endpoint
 	let baseUrl = 'https://api.cloudbeds.com/api/v1.3';
-	if (endpoint.startsWith('/addons/') || endpoint.startsWith('/integration/') || endpoint.startsWith('/events/')) {
+	const needsPropertyHeader = endpoint.startsWith('/addons/') || endpoint.startsWith('/integration/') || endpoint.startsWith('/events/');
+	if (needsPropertyHeader) {
 		baseUrl = 'https://api.cloudbeds.com';
+	}
+
+	const headers: IDataObject = {
+		'Content-Type': 'application/json',
+	};
+
+	// Add X-Property-ID header for endpoints that require it
+	if (needsPropertyHeader) {
+		const credentials = await this.getCredentials(credentialType);
+		if (credentials.propertyId) {
+			headers['X-Property-ID'] = credentials.propertyId as string;
+		}
 	}
 
 	const options: IHttpRequestOptions = {
@@ -22,9 +35,7 @@ export async function cloudbedsApiRequest(
 		body,
 		qs,
 		url: `${baseUrl}${endpoint}`,
-		headers: {
-			'Content-Type': 'application/json',
-		},
+		headers,
 		json: true,
 	};
 
