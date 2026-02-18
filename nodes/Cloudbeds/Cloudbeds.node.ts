@@ -16,6 +16,7 @@ import * as marketSegmentation from './resources/marketSegmentation';
 import * as doorLock from './resources/doorLock';
 import * as integrationEvent from './resources/integrationEvent';
 import * as guest from './resources/guest';
+import * as payment from './resources/payment';
 
 export class Cloudbeds implements INodeType {
 	description: INodeTypeDescription = {
@@ -116,6 +117,11 @@ export class Cloudbeds implements INodeType {
 						description: 'Gestionar segmentos de mercado',
 					},
 					{
+						name: 'Payment',
+						value: 'payment',
+						description: 'Gestionar pagos y links de pago (Pay By Link)',
+					},
+					{
 						name: 'Property',
 						value: 'property',
 						description: 'Gestionar propiedades',
@@ -141,6 +147,7 @@ export class Cloudbeds implements INodeType {
 			...integrationEvent.descriptions,
 			...item.descriptions,
 			...marketSegmentation.descriptions,
+			...payment.descriptions,
 			...property.descriptions,
 			...reservation.descriptions,
 			...room.descriptions,
@@ -173,6 +180,8 @@ export class Cloudbeds implements INodeType {
 					responseData = await item.execute.call(this, operation, i);
 				} else if (resource === 'marketSegmentation') {
 					responseData = await marketSegmentation.execute.call(this, operation, i);
+				} else if (resource === 'payment') {
+					responseData = await payment.execute.call(this, operation, i);
 				} else if (resource === 'doorLock') {
 					responseData = await doorLock.execute.call(this, operation, i);
 				} else if (resource === 'integrationEvent') {

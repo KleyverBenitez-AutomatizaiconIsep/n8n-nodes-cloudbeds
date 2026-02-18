@@ -13,7 +13,7 @@ export async function cloudbedsApiRequest(
 
 	// Determine base URL based on endpoint
 	let baseUrl = 'https://api.cloudbeds.com/api/v1.3';
-	const needsPropertyHeader = endpoint.startsWith('/addons/') || endpoint.startsWith('/integration/') || endpoint.startsWith('/events/');
+	const needsPropertyHeader = endpoint.startsWith('/addons/') || endpoint.startsWith('/integration/') || endpoint.startsWith('/events/') || endpoint.startsWith('/payments/');
 	if (needsPropertyHeader) {
 		baseUrl = 'https://api.cloudbeds.com';
 	}
