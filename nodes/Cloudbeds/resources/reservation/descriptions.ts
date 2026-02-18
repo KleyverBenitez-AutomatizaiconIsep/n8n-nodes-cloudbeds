@@ -13,6 +13,12 @@ export const reservationOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Create',
+				value: 'create',
+				description: 'Create a new reservation',
+				action: 'Create a reservation',
+			},
+			{
 				name: 'Get',
 				value: 'get',
 				description: 'Get a reservation',
@@ -36,6 +42,260 @@ export const reservationOperations: INodeProperties[] = [
 ];
 
 export const reservationFields: INodeProperties[] = [
+	// Create
+	{
+		displayName: 'Start Date (Check-In)',
+		name: 'startDate',
+		type: 'dateTime',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'Check-in date for the reservation',
+	},
+	{
+		displayName: 'End Date (Check-Out)',
+		name: 'endDate',
+		type: 'dateTime',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'Check-out date for the reservation',
+	},
+	{
+		displayName: 'Guest First Name',
+		name: 'guestFirstName',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'First name of the guest',
+	},
+	{
+		displayName: 'Guest Last Name',
+		name: 'guestLastName',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'Last name of the guest',
+	},
+	{
+		displayName: 'Guest Email',
+		name: 'guestEmail',
+		type: 'string',
+		placeholder: 'name@email.com',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'Email of the guest',
+	},
+	{
+		displayName: 'Guest Country',
+		name: 'guestCountry',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: 'MX',
+		description: 'ISO 2-character country code (e.g., MX, US, ES)',
+	},
+	{
+		displayName: 'Guest ZIP Code',
+		name: 'guestZip',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'ZIP/Postal code of the guest',
+	},
+	{
+		displayName: 'Room Type ID',
+		name: 'roomTypeId',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		default: '',
+		description: 'Room type ID (use Get Room Types to find available IDs)',
+	},
+	{
+		displayName: 'Number of Rooms',
+		name: 'roomQuantity',
+		type: 'number',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 1,
+		description: 'Number of rooms to reserve',
+	},
+	{
+		displayName: 'Adults',
+		name: 'adults',
+		type: 'number',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 1,
+		description: 'Number of adults',
+	},
+	{
+		displayName: 'Children',
+		name: 'children',
+		type: 'number',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		typeOptions: {
+			minValue: 0,
+		},
+		default: 0,
+		description: 'Number of children',
+	},
+	{
+		displayName: 'Payment Method',
+		name: 'paymentMethod',
+		type: 'options',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		options: [
+			{ name: 'Cash', value: 'cash' },
+			{ name: 'Credit Card', value: 'credit' },
+			{ name: 'E-Banking', value: 'ebanking' },
+			{ name: 'PayPal', value: 'pay_pal' },
+		],
+		default: 'cash',
+		description: 'Payment method for the reservation',
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['reservation'],
+				operation: ['create'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Guest Phone',
+				name: 'guestPhone',
+				type: 'string',
+				default: '',
+				description: 'Phone number of the guest',
+			},
+			{
+				displayName: 'Guest Gender',
+				name: 'guestGender',
+				type: 'options',
+				options: [
+					{ name: 'Male', value: 'M' },
+					{ name: 'Female', value: 'F' },
+					{ name: 'Not Specified', value: 'N/A' },
+				],
+				default: 'N/A',
+				description: 'Gender of the guest',
+			},
+			{
+				displayName: 'Source ID',
+				name: 'sourceID',
+				type: 'string',
+				default: '',
+				description: 'Third-party source ID for this reservation',
+			},
+			{
+				displayName: 'Third Party Identifier',
+				name: 'thirdPartyIdentifier',
+				type: 'string',
+				default: '',
+				description: 'Identifier from booking channel',
+			},
+			{
+				displayName: 'Estimated Arrival Time',
+				name: 'estimatedArrivalTime',
+				type: 'string',
+				default: '',
+				description: 'Estimated arrival time in 24-hour format (e.g., 14:00)',
+			},
+			{
+				displayName: 'Promo Code',
+				name: 'promoCode',
+				type: 'string',
+				default: '',
+				description: 'Promotional code for specials and packages',
+			},
+			{
+				displayName: 'Send Confirmation Email',
+				name: 'sendEmailConfirmation',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to send confirmation email to guest',
+			},
+		],
+	},
 	// Get
 	{
 		displayName: 'Reservation ID',

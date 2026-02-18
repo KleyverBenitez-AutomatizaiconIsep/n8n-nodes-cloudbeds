@@ -8,6 +8,8 @@ export const descriptions = [...reservationOperations, ...reservationFields];
 
 export async function execute(this: IExecuteFunctions, operation: string, index: number) {
 	switch (operation) {
+		case 'create':
+			return await operations.create.call(this, index);
 		case 'get':
 			return await operations.get.call(this, index);
 		case 'getAll':
